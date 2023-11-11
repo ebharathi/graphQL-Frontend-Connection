@@ -10,15 +10,15 @@ const Navbar=()=>{
             await axios.post('/api/login')
         }
         // signup()
-        login();
+        // login();
     },[])
     return (
-        <nav className="bg-[#ddd] py-3 px-1">
+        <nav className="bg-[#4287f5] text-white px-2 py-3 px-1">
              <div className="flex">
                 <h1 className="flex-1">GRAPHQL PROJECT</h1>
-                <ul className="grid grid-cols-2 space-x-2">
-                    <li><Link href="/login">Login</Link></li>
-                    <li><Link href="/signup">Signup</Link></li>
+                <ul className="grid grid-cols-2 space-x-2 text-[14px]">
+                    <li><Link href="/login">LOGIN</Link></li>
+                    <li><Link href="/signup">SIGNUP</Link></li>
                 </ul>
              </div>
         </nav>

@@ -1,3 +1,17 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+
+body{
+    background: url('../pages/images/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+input::placeholder{
+    color: #fff;
+    font-weight:300;
+}
