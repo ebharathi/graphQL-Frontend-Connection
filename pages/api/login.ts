@@ -1,21 +1,21 @@
 import type { NextApiRequest,NextApiResponse } from "next";
 import axios from 'axios'
-export default async function login()
+export default async function login(req:NextApiRequest,res:NextApiResponse)
 {
-    let name="jaya"
-    let email="jaya@gmail.com"
+    let email=req.body.email
+    let password=req.body.password
     let url=`http://localhost:5000/graphql`
     let query=`
-      query login($name:String,$email:String){
-        login(name:$name,email:$email)
+      query login($email:String,$password:String){
+        login(email:$email,password:$password)
         {
             token
         }
       }
     `
     let variables={
-        name:name,
-        email:email
+        email:email,
+        password:password
     }
     const options={
         method:'post',
@@ -27,7 +27,19 @@ export default async function login()
     }
     await axios(options)
     .then((response:any)=>{
+      console.log("[=} response came")
+         if(response?.data?.errors)
+         {
+          console.log("e->",response?.data?.errors[0]);
+          res.json({
+            error:true,
+            message:response?.data?.errors[0]?.message
+          })
+         }
          if(response?.data?.data?.login)
-           console.log("login response---?",response?.data?.data?.login);
+           res.json({
+             error:false,
+             data:response?.data?.data?.login
+          })
     })
 }
