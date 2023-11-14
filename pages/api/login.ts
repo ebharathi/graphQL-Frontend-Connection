@@ -25,6 +25,7 @@ export default async function login(req:NextApiRequest,res:NextApiResponse)
             variables:variables
         }
     }
+    // console.log("options-->",options);
     await axios(options)
     .then((response:any)=>{
       console.log("[=} response came")

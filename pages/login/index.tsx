@@ -7,16 +7,20 @@ import { useState } from "react";
 const Signup=()=>{
     const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
+    const [btn,setBtn]=useState("LOGIN");
     const [error,setError]=useState("");
     const submitHandler=async(e:Event)=>{
         e.preventDefault();
         console.log("[=}submitted")
+        setBtn("LOGGING...")
         if(email==""||password=="")
          {
+             setBtn("LOGIN")
              setError("Please enter all credentials!!")
              setTimeout(() => {
                  setError("")
              }, 3000);
+
              return;
          }
          await axios.post("/api/login",{
@@ -28,6 +32,7 @@ const Signup=()=>{
             if(response?.data?.error==true)
             {
                 setError(response?.data?.message);
+                setBtn("LOGIN");
                 setTimeout(() => {
                     setError("");
                 }, 3000);
@@ -35,7 +40,11 @@ const Signup=()=>{
             }
             if(response?.data?.error==false)
             {
-                window.location.pathname="/";
+                  console.log("LOGGED IN");
+                  console.log("login response from backend--->",response?.data?.data);
+                  localStorage.setItem('u_id',response?.data?.data?.token);
+                  console.log("cookie set[+]")
+                  window.location.pathname="/";
             }
          })
     }
@@ -66,7 +75,7 @@ const Signup=()=>{
                       </div>
                     </div>
                     <div className="text-white text-[13px]">{error}</div>
-                    <button className="mt-2 w-custom-2 text-black bg-white hover:text-white hover:bg-black px-5 py-2 rounded-3xl font-bold">LOGIN</button>
+                    <button className="mt-2 w-custom-2 text-black bg-white hover:text-white hover:bg-black px-5 py-2 rounded-3xl font-bold">{btn}</button>
                     <p className="text-[13px] text-white mt-2">Don't have an account? <a href="/signup" className="text-black underline">create account</a></p>
                 </form>
             </div>
