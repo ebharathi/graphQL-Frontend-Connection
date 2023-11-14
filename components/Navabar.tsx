@@ -1,26 +1,30 @@
 import Link from "next/link";
 import axios from 'axios';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 const Navbar=()=>{
+    const [email,setEmail]=useState("");
     useEffect(()=>{
-        const signup=async()=>{
-            await axios.post('/api/signup')
-        }
-        const login=async()=>{
-            await axios.post('/api/login')
-        }
-        // signup()
-        // login();
+      const userDetails=async()=>{
+            let token=localStorage.getItem('u_id');
+            console.log("token-->",token);
+            await axios.post('/api/user',{
+                token:token
+            })
+            .then((resp:any)=>{
+                console.log("response from next.js backend-  for fetching user details-->",resp);
+                if(resp.data.error==false)
+                {
+                    setEmail(resp.data?.data?.email);
+                    return;
+                }
+            })
+      }
+      if(email=="")
+       userDetails();
     },[])
     return (
-        <nav className="bg-[#4287f5] text-white px-2 py-3 px-1">
-             <div className="flex">
-                <h1 className="flex-1">GRAPHQL PROJECT</h1>
-                <ul className="grid grid-cols-2 space-x-2 text-[14px]">
-                    <li><Link href="/login">LOGIN</Link></li>
-                    <li><Link href="/signup">SIGNUP</Link></li>
-                </ul>
-             </div>
+        <nav className="text-[#8f8786] text-right md:text-[16px] text-[11px]  py-3 px-1">
+                    <p>{email}</p>
         </nav>
     )
 }

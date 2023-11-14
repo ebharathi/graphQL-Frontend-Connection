@@ -44,7 +44,7 @@ const Signup=()=>{
                   console.log("login response from backend--->",response?.data?.data);
                   localStorage.setItem('u_id',response?.data?.data?.token);
                   console.log("cookie set[+]")
-                  window.location.pathname="/";
+                  window.location.pathname="/user";
             }
          })
     }
