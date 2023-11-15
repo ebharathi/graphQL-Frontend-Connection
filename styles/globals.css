@@ -15,3 +15,9 @@ input::placeholder{
     color: #fff;
     font-weight:300;
 }
+.input-placeholder::placeholder{
+    color:black !important;
+    font-weight: 400;
+    font-size: 14px;
+    outline: none;
+}

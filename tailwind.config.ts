@@ -18,7 +18,8 @@ const config: Config = {
       },
       width:{
         'custom-1':'200px',
-        'custom-2':'275px'
+        'custom-2':'275px',
+        'custom-3':'350px'
       }
     },
   },
