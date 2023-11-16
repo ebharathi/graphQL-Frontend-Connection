@@ -1,6 +1,7 @@
 import axios from "axios";
 import { FC, useEffect } from "react";
 import {useState} from 'react'
+import DescriptionIcon from '@mui/icons-material/Description';
 export interface FileProps{
 
 }
@@ -9,6 +10,7 @@ const File:FC<FileProps>=()=>{
     const [fileName,setFileName]=useState("");
     const [success,setSuccess]=useState(false);
     const [loader,setLoader]=useState(false);
+    const [files,setFiles]=useState([]);
     const createFile=async()=>{
         setLoader(true);
         let token=localStorage.getItem('u_id');
@@ -34,9 +36,22 @@ const File:FC<FileProps>=()=>{
             setLoader(false);
         }
     },[isOpen])
-
+    useEffect(()=>{
+        const getFiles=async()=>{
+            let token:any=localStorage.getItem('u_id');
+            await axios.post('/api/getFiles',{
+                token:token
+            })
+            .then((response:any)=>{
+                 console.log("response for files from next.js backend--->",response?.data)
+                 if(response?.data?.error==false)
+                   setFiles(response?.data?.data)
+            })
+        }
+        getFiles()
+    },[success])
   return(
-     <div>
+     <div className="file">
          <div className="panel">
                <button className="bg-blue-500 px-4 py-2 rounded-lg text-white" onClick={()=>setIsOpen(true)}>ADD FILE</button>
          </div>
@@ -75,6 +90,18 @@ const File:FC<FileProps>=()=>{
              }
          </div>
          }
+         <div className=" mt-5  py-5 px-2 grid grid-cols-12">
+                 {
+                    files.map((f:any)=><div className="text-[#6d736f] flex flex-col">
+                        <div className="text-center">
+                          <DescriptionIcon className="cursor-pointer hover:text-white"  sx={{ fontSize: 120 }}/>
+                        </div>
+                        <div className="text-center">
+                          <span className="">{f.title}</span>
+                        </div>
+                        </div>)
+                 }
+         </div>
      </div>
   )
 }
