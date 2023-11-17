@@ -12,6 +12,7 @@ export default async function getFiles(
            {
              userFiles(token:$token)
              {
+                 _id
                  title
              }
            }

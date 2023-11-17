@@ -94,7 +94,9 @@ const File:FC<FileProps>=()=>{
                  {
                     files.map((f:any)=><div className="text-[#6d736f] flex flex-col">
                         <div className="text-center">
+                          <a href={`/file/${f?._id}`}>
                           <DescriptionIcon className="cursor-pointer hover:text-white"  sx={{ fontSize: 120 }}/>
+                          </a>
                         </div>
                         <div className="text-center">
                           <span className="">{f.title}</span>
