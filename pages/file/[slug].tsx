@@ -12,7 +12,7 @@ const FileIndex=()=>
     useEffect(()=>{
         const getFileData=async()=>{
             let id=router?.query?.slug
-            let url="http://localhost:5000/graphql";
+            let url="https://graph-ql-xi.vercel.app/graphql";
             let query=`
               query file($id:ID)
               {
@@ -72,7 +72,7 @@ const FileIndex=()=>
         }
         const options={
             method:'POST',
-            url:'http://localhost:5000/graphql',
+            url:'https://graph-ql-xi.vercel.app/graphql',
             data:{
                 query:query,
                 variables:variables

@@ -27,7 +27,7 @@ export default async function createFile(
          }
          const options={
           method:'POST',
-          url:'http://localhost:5000/graphql',
+          url:'https://graph-ql-xi.vercel.app/graphql',
           data:{
                query:query,
                variables:variables

@@ -22,7 +22,7 @@ export default async function user(
     }
     const options={
         method:'post',
-        url:'http://localhost:5000/graphql',
+        url:'https://graph-ql-xi.vercel.app/graphql',
         data:{
             query:query,
             variables:variables

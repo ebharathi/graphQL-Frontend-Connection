@@ -7,7 +7,7 @@ export default async function signup(req:NextApiRequest,res:NextApiResponse)
     const email = req.body.email;
     const password =req.body.password;
     console.log("-->",name,"-->",email,"--->",password)
-    let url="http://localhost:5000/graphql";
+    let url="https://graph-ql-xi.vercel.app/graphql";
     let query=`
       mutation createUser($name:String,$email:String,$password:String){
         createUser(name:$name,email:$email,password:$password)

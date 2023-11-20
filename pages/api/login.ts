@@ -4,7 +4,7 @@ export default async function login(req:NextApiRequest,res:NextApiResponse)
 {
     let email=req.body.email
     let password=req.body.password
-    let url=`http://localhost:5000/graphql`
+    let url=`https://graph-ql-xi.vercel.app/graphql`
     let query=`
       query login($email:String,$password:String){
         login(email:$email,password:$password)
